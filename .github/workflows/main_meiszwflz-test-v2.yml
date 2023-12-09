@@ -57,6 +57,6 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_291038A7A98943A8AA7C81155066199E }}
           package: .
-          
-     - name: Delete zip file
+            
+      - name: Delete zip file
         run: rm nest.zip
