@@ -20,6 +20,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
+          
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: node-app
+          path: release.zip
 
       - name: npm install, build, and test
         run: |
@@ -30,11 +36,6 @@ jobs:
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
 
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
-        with:
-          name: node-app
-          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -56,7 +57,7 @@ jobs:
           app-name: 'meiszwflz-test-v2'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_291038A7A98943A8AA7C81155066199E }}
-          package: .
+          package: release.zip
             
       - name: Delete zip file
-        run: rm nest.zip
+        run: rm release.zip
