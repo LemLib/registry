@@ -26,7 +26,7 @@ jobs:
           npm install
           npm run build --if-present
           npm run test --if-present
-      
+
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
 
@@ -57,6 +57,6 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_291038A7A98943A8AA7C81155066199E }}
           package: release.zip
-            
+
       - name: Delete zip file
         run: rm release.zip
